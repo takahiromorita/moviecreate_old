@@ -8,6 +8,7 @@ var routes = require('./routes');
 var user = require('./routes/user');
 var post = require('./routes/post');
 var json = require('./routes/json');
+var tenki = require('./routes/tenki');
 var http = require('http');
 var path = require('path');
 
@@ -35,6 +36,7 @@ app.get('/users', user.list);
 app.get('/post', post.index);
 app.post('/post', post.post);
 app.get('/json', json.test);
+app.get('/tenki', tenki.get);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
