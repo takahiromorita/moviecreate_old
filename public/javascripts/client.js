@@ -1,10 +1,11 @@
 /* global $ */
+var socket = io.connect('http://localhost:3000/');
+var s = socket.of('/socket');
+s.on('connect', function() {
+    console.log("conneted!!");
+});
+
 $(function(){
-    var socket = io.connect('http://localhost:3000/');
-    var s = socket.of('/socket');
-    s.on('connect', function(msg) {
-        console.log("conneted!!");
-    });
 
 	var x = y = z = 0;
 	var color = 0;
