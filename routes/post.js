@@ -1,5 +1,6 @@
 exports.index = function(req, res) {
-    console.log(req.query);
+    
+    console.log(req);
     res.render('post', { data: '' });
 }
 
