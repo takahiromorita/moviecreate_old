@@ -9,8 +9,10 @@ var user = require('./routes/user');
 var post = require('./routes/post');
 var json = require('./routes/json');
 var tenki = require('./routes/tenki');
+var socket = require('./routes/socket');
 var http = require('http');
 var path = require('path');
+var sanitize = require('validator').sanitize;
 
 var app = express();
 
@@ -37,7 +39,24 @@ app.get('/post', post.index);
 app.post('/post', post.post);
 app.get('/json', json.test);
 app.get('/tenki', tenki.get);
+app.get('/socket', socket.index);
 
-http.createServer(app).listen(app.get('port'), function(){
+var server =  http.createServer(app);
+server.listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
+
+var io = require('socket.io').listen(server);
+io.on('connection',function(socket){
+  console.log('connected!!');
+  socket.on('message', function(data){
+    var msg = sanitize(data.value).entityEncode();
+    io.sockets.emit('message', {value: msg});
+    //io.sockets.emit('message', {value: data.value});
+  });
+
+  socket.on('disconnect', function(){
+    console.log('disconnected!');
+  });
+});
+
