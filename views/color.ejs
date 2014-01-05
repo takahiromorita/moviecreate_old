@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>color</title>
+</head>
+<body>
+<script src="/socket.io/socket.io.js"></script>
+<script type="text/javascript">
+  var socket = io.connect('http://nodestudy.herokuapp.com');
+  //var socket = io.connect('http://localhost:3000/');
+  var s = socket.of('/socket');
+  s.on('connect', function(msg) {
+    console.log('connected');
+  });
+
+  s.on('color', function(rgb) {
+  	console.log(rgb);
+    $('body').css({backgroundColor:rgb});
+  });
+
+</script>
+</body>
+</html>

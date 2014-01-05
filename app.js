@@ -40,6 +40,8 @@ app.post('/post', post.post);
 app.get('/json', json.test);
 app.get('/tenki', tenki.get);
 app.get('/socket', socket.index);
+app.get('/client', function(req,res){res.render('client');});
+app.get('/color', function(req,res){res.render('color');});
 
 var server =  http.createServer(app);
 server.listen(app.get('port'), function(){
@@ -47,12 +49,20 @@ server.listen(app.get('port'), function(){
 });
 
 var io = require('socket.io').listen(server);
-io.on('connection',function(socket){
+var namespace = io.of('/socket')
+
+namespace.on('connection',function(socket){
   console.log('connected!!');
   socket.on('message', function(data){
+    console.log();
     var msg = sanitize(data.value).entityEncode();
-    io.sockets.emit('message', {value: msg});
+    namespace.emit('message', {value: msg});
+    //io.sockets.emit('message', {value: msg});
     //io.sockets.emit('message', {value: data.value});
+  });
+
+  socket.on('color', function(rgb){
+    namespace.emit('color', rgb);
   });
 
   socket.on('disconnect', function(){
