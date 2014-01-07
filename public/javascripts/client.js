@@ -8,7 +8,7 @@ s.on('connect', function() {
 
 $(function(){
 
-	var x = y = z = 0;
+	var x = 0, y = 0, z = 0;
 	var color = 0;
 
 	window.addEventListener('devicemotion', function(event) {
