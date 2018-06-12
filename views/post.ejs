@@ -11,5 +11,40 @@
   <input type="text" name="data"/>
   <input type="submit" />
  </form>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="javascripts/boombox.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+$(function(){
+	$('#qrcode').click(function(){
+		wn = '.' + $(this).data('tgt');
+		var mW = $(wn).find('.modalBody').innerWidth() / 2;
+		var mH = $(wn).find('.modalBody').innerHeight() / 2;
+		$(wn).find('.modalBody').css({'margin-left':-mW,'margin-top':-mH});
+		$(wn).fadeIn(500);
+	});
+	$('.close,.modalBK').click(function(){
+		$(wn).fadeOut(500);
+		boombox.get('bc').play();
+	});
+	var mW = $('.tutorial').find('.modalBody').innerWidth() / 2;
+	var mH = $('.tutorial').find('.modalBody').innerHeight() / 2;
+	$('.tutorial').find('.modalBody').css({'margin-left':-mW,'margin-top':-mH});
+	$('.tutorial').fadeIn(500);
+	wn = $('.tutorial');
+	window.boombox.setup();
+    window.boombox.load(
+        'bc',
+        {
+            src : [
+                {
+                    media: 'audio/mp3',
+                    path: 'sound/SE_bc_.mp3'
+                }
+            ],
+            filter : []
+        }
+    );
+});
+</script>
 </body>
 </html>
