@@ -44,3 +44,7 @@ button.button2:hover{
     background: #668ad8;
      box-shadow: 0px 0px 0px 5px #668ad8;
 }
+
+.button_wrapper{
+   text-align:center;
+}
