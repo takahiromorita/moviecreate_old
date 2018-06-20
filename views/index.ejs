@@ -6,6 +6,26 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-  <button class="button1" type="submit">Button</button>
+  <button class="button1" type="button" onclick="OnButtonClick();">Button</button>
+  <script src="javascripts/boombox.min.js" type="text/javascript"></script>
+  <script language="javascript" type="text/javascript">
+  function OnButtonClick() {
+      window.boombox.setup();
+      window.boombox.load(
+          'bc',
+          {
+              src : [
+                  {
+                      media: 'video/mp4',
+                      path: 'sound/airman3.mp4'
+                  }
+              ],
+              filter : []
+          },
+          true
+      );
+      boombox.get('bc').play();
+  }
+  </script>
   </body>
 </html>
