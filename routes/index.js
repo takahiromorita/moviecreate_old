@@ -4,5 +4,5 @@
  */
 
 exports.index = function(req, res){
-  res.render('index', { title: 'Node Study' });
+  res.render('index', { title: 'Denjiki-gaku ga wakaranai' });
 };
